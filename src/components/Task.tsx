@@ -1,26 +1,58 @@
-import { Paper, Typography, IconButton } from "@mui/material";
+import { Card, CardHeader, CardContent, TextField, Typography, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-
+import { useState } from "react";
 interface TaskProps {
   id: number;
-  title: string;
-  description: string;
-  onDelete: (id: number) => void;
+  initialTitle: string;
+  initialSummary: string;
+  initialDescription: string;
+  onDelete: () => void;
 }
 
-const Task: React.FC<TaskProps> = ({ id, title, description, onDelete }) => {
+const Task: React.FC<TaskProps> = ({ id, initialTitle, initialSummary, initialDescription, onDelete }) => {
+  const [title, setTitle] = useState(initialTitle);
+  const [summary, setSummary] = useState(initialSummary);
+  const [description, setDescription] = useState(initialDescription);
+
   return (
-    <Paper elevation={2} style={{ padding: '8px', marginBottom: '8px' }}>
-      <Typography variant="subtitle1" gutterBottom>
-        {title}
-      </Typography>
-      <Typography variant="body2" color="textSecondary">
-        {description}
-      </Typography>
-      <IconButton aria-label="delete" color="error" size="small" onClick={() => onDelete(id)}>
-        <DeleteIcon fontSize="small" />
-      </IconButton>
-    </Paper>
+    <Card style={{ marginBottom: "8px" }}>
+      <CardHeader
+        title={
+          <TextField
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            fullWidth
+            variant="standard"
+            label="Title"
+          />
+        }
+        action={
+          <IconButton aria-label="delete" onClick={onDelete}>
+            <DeleteIcon />
+          </IconButton>
+        }
+      />
+      <CardContent>
+        <TextField
+          value={summary}
+          onChange={(e) => setSummary(e.target.value)}
+          fullWidth
+          variant="standard"
+          label="Summary"
+          multiline
+          rows={2}
+          />
+        <TextField
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          fullWidth
+          variant="standard"
+          label="Description"
+          multiline
+          rows={4}
+        />
+      </CardContent>
+    </Card>
   );
 };
 
