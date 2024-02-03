@@ -6,13 +6,13 @@ interface TaskProps {
   initialTitle: string;
   initialSummary: string;
   initialDescription: string;
-  onDelete: () => void;
+  onDelete: (id: number) => void;
 }
 
 const Task: React.FC<TaskProps> = ({ id, initialTitle, initialSummary, initialDescription, onDelete }) => {
-  const [title, setTitle] = useState(initialTitle);
-  const [summary, setSummary] = useState(initialSummary);
-  const [description, setDescription] = useState(initialDescription);
+  const [title, setTitle] = useState(initialTitle || "");
+  const [summary, setSummary] = useState(initialSummary || "");
+  const [description, setDescription] = useState(initialDescription || "");
 
   return (
     <Card style={{ marginBottom: "8px" }}>
@@ -27,7 +27,7 @@ const Task: React.FC<TaskProps> = ({ id, initialTitle, initialSummary, initialDe
           />
         }
         action={
-          <IconButton aria-label="delete" onClick={onDelete}>
+          <IconButton aria-label="delete" onClick={() => onDelete(id)}>
             <DeleteIcon />
           </IconButton>
         }
