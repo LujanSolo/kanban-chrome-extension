@@ -34,7 +34,7 @@ const Board: React.FC = () => {
   return (
     <Container maxWidth="xl">
       <Typography variant="h4" gutterBottom>
-        Kanban Board - Chrome Extension
+        Sneak Preview Entertainment - "The Prank" Task Board
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={4}>
