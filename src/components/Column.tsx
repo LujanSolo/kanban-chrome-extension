@@ -23,7 +23,7 @@ const Column: React.FC<ColumnProps> = ({ title, tasks }) => {
           {/* Add more task details as needed */}
         </div>
       ))}
-      <Button variant="outlined" color="primary" size="small" style={{ marginTop: '12px', marginBottom: "4px" }}>
+      <Button variant="contained" color="primary" size="small" style={{ marginTop: '12px', marginBottom: "4px" }}>
         Add Task
       </Button>
     </Paper>
