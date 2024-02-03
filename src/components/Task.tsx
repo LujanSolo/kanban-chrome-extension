@@ -1,5 +1,7 @@
-import { Card, CardHeader, CardContent, TextField, Typography, IconButton } from "@mui/material";
+import { Card, CardHeader, CardContent, TextField, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { useDrag } from "react-dnd";
+import { ItemTypes } from "../constants";
 import { useState } from "react";
 interface TaskProps {
   id: number;
