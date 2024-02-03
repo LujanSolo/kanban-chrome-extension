@@ -16,8 +16,12 @@ const Task: React.FC<TaskProps> = ({ id, initialTitle, initialSummary, initialDe
   const [summary, setSummary] = useState(initialSummary || "");
   const [description, setDescription] = useState(initialDescription || "");
 
+  const [, drag] = useDrag({
+    item: { type: ItemTypes.TASK, id },
+  });
+
   return (
-    <Card style={{ marginBottom: "8px" }}>
+    <Card ref={drag} style={{ marginBottom: "8px" }}>
       <CardHeader
         title={
           <TextField
