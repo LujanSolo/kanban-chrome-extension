@@ -1,5 +1,6 @@
-import { Paper, Typography, Button } from '@mui/material';
+import { Paper, Typography, IconButton } from '@mui/material';
 import Task from './Task';
+import AddIcon from '@mui/icons-material/Add';
 
 interface Task {
   id: number;
@@ -11,20 +12,30 @@ interface ColumnProps {
   title: string;
   tasks: Task[];
   onDeleteTask: (id: number) => void;
+  onAddTask: () => void;
 }
 
-const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask }) => {
+const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask }) => {
   return (
     <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px' }}>
-      <Typography variant="h6" gutterBottom>
-        {title}
-      </Typography>
+      <div style={{
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: "8px"
+      }}>
+        <Typography variant="h6" gutterBottom>
+          {title}
+        </Typography>
+        <IconButton aria-label="add" color="primary" onClick={onAddTask}>
+          <AddIcon />
+        </IconButton>
+      </div>
+
       {tasks.map((task) => (
         <Task key={task.id} {...task} onDelete={() => onDeleteTask(task.id)} />
       ))}
-      <Button variant="contained" color="primary" size="small" style={{ marginTop: '12px', marginBottom: "4px" }}>
-        Add Task
-      </Button>
+     
     </Paper>
   );
 };
