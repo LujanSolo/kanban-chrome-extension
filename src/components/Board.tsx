@@ -1,38 +1,40 @@
-import { useState } from 'react';
+// Board.tsx
+import React, { useState } from 'react';
 import { Container, Typography, Grid } from '@mui/material';
 import Column from './Column';
-import Task from './Task';
+
 interface Task {
   id: number;
   title: string;
+  summary: string;
   description: string;
 }
 
-const sampleTasks: Task[] = [
-  { id: 1, title: 'Task 1', description: 'Description for Task 1' },
-  { id: 2, title: 'Task 2', description: 'Description for Task 2' },
-];
-
 const Board: React.FC = () => {
-  const [tasks, setTasks] = useState<Task[]>(sampleTasks);
+  const [tasks, setTasks] = useState<Task[]>([]);
 
-  const handleCreateTask = (): void => {
-    // Ensure that new tasks are added only to the "To Do" column
-    const newTask: Task = {
-      id: tasks.length + 1,
-      title: 'New Task in To Do',
-      description: 'Description for the new task in To Do',
-    };
-
-    // Update the state only if the task is in the "To Do" column
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks, newTask];
-      return updatedTasks;
-    });
+  const handleDeleteTask = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== taskId));
   };
 
-  const handleDeleteTask = (id: number): void => {
-    setTasks((prevTasks) => prevTasks.filter((task) => task.id !== id));
+  const handleAddTask = () => {
+    const newTask: Task = {
+      id: tasks.length + 1,
+      title: 'To Do',
+      summary: 'Summary',
+      description: 'Description',
+    };
+
+    setTasks((prevTasks) => [...prevTasks, newTask]);
+  };
+
+  const handleMoveTask = (taskId: number, targetColumn: string) => {
+    setTasks((prevTasks) => {
+      const updatedTasks = prevTasks.map((task) =>
+        task.id === taskId ? { ...task, title: targetColumn } : task
+      );
+      return updatedTasks;
+    });
   };
 
   return (
@@ -44,23 +46,26 @@ const Board: React.FC = () => {
         <Grid item xs={4}>
           <Column
             title="To Do"
-            tasks={tasks.filter((task) => task.title.includes("To Do"))}
+            tasks={tasks.filter((task) => task.title === 'To Do')}
             onDeleteTask={handleDeleteTask}
-            onAddTask={handleCreateTask}
+            onAddTask={handleAddTask}
+            onMoveTask={handleMoveTask}
           />
         </Grid>
         <Grid item xs={4}>
           <Column
             title="In Progress"
-            tasks={tasks.filter((task) => task.title.includes("In Progress"))}
+            tasks={tasks.filter((task) => task.title === 'In Progress')}
             onDeleteTask={handleDeleteTask}
+            onMoveTask={handleMoveTask}
           />
         </Grid>
         <Grid item xs={4}>
           <Column
             title="Done"
-            tasks={tasks.filter((task) => task.title.includes("Done"))}
+            tasks={tasks.filter((task) => task.title === 'Done')}
             onDeleteTask={handleDeleteTask}
+            onMoveTask={handleMoveTask}
           />
         </Grid>
       </Grid>

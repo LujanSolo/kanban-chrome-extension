@@ -1,10 +1,13 @@
 import { Paper, Typography, IconButton } from '@mui/material';
 import Task from './Task';
 import AddIcon from '@mui/icons-material/Add';
+import { useDrop } from 'react-dnd';
+import { ItemTypes } from '../constants';
 
 interface Task {
   id: number;
   title: string;
+  summary: string;
   description: string;
 }
 
@@ -13,11 +16,17 @@ interface ColumnProps {
   tasks: Task[];
   onDeleteTask: (id: number) => void;
   onAddTask?: () => void;
+  onMoveTask: (taskId: number, targetColumn: string) => void;
 }
 
-const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask }) => {
+const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask, onMoveTask }) => {
+  const [, drop] = useDrop({
+    accept: ItemTypes.TASK,
+    drop: (item: { id: number }) => onMoveTask(item.id, title),
+  });
+
   return (
-    <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px', minWidth: '250px' }}>
+    <Paper elevation={3} style={{ padding: '16px', marginBottom: '16px', minWidth: '250px' }} ref={drop}>
       <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
           <Typography variant="h6" style={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>
@@ -31,7 +40,12 @@ const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask }
         </div>
         <div style={{ flex: 1 }}>
           {tasks.map((task) => (
-            <Task key={task.id} {...task} onDelete={() => onDeleteTask(task.id)} />
+            <Task
+              key={task.id}
+              {...task}
+              onDelete={() => onDeleteTask(task.id)}
+              onMove={(targetColumn) => onMoveTask(task.id, targetColumn)}
+            />
           ))}
         </div>
       </div>
