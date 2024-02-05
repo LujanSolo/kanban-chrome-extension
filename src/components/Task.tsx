@@ -1,5 +1,4 @@
-// src/components/Task.tsx
-import React, { useState } from 'react';
+import { CSSProperties, useState } from 'react';
 import { Card, CardHeader, CardContent, IconButton, TextField, TextareaAutosize } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDrag } from 'react-dnd';
@@ -11,19 +10,17 @@ interface TaskProps {
   summary: string;
   description: string;
   onDelete: (id: number) => void;
-  onMove: (targetColumn: string) => void;
-}
-
-interface DragObjectWithType {
-  type: string;
-  id: number;
+  onMove: () => void;
 }
 
 const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }) => {
-  const [, drag] = useDrag<DragObjectWithType, void, { isDragging: boolean }>({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.TASK,
-    item: { type: ItemTypes.TASK, id},
-  });
+    item: { id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  }));
 
   const handleInputChange = (field: keyof typeof userInput, value: string) => {
     setUserInput((prev) => ({ ...prev, [field]: value }));
@@ -35,8 +32,14 @@ const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }
     description: description || "",
   });
 
+  const dragStyle: CSSProperties = isDragging ? {
+    opacity: 0.5,
+    backgroundColor: '$f4f4f4',
+    border: '1px dashed #000',
+  } : {};
+
   return (
-    <Card ref={drag} style={{ marginBottom: '8px' }}>
+    <Card ref={drag} style={{ marginBottom: '8px', ...dragStyle }}>
       <CardHeader
         title={
           <TextField

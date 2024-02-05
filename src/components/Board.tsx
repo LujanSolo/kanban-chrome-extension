@@ -1,5 +1,4 @@
-// Board.tsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Container, Typography, Grid } from '@mui/material';
 import Column from './Column';
 
