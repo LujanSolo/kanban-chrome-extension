@@ -18,7 +18,7 @@ const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }
     type: ItemTypes.TASK,
     item: { id },
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: !monitor.isDragging(),
     }),
   }));
 
