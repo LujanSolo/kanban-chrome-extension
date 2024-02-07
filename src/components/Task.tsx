@@ -3,7 +3,6 @@ import { Card, CardHeader, CardContent, IconButton, TextField, TextareaAutosize 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDrag, DragPreviewImage } from 'react-dnd';
 import { ItemTypes } from '../constants';
-//new comment
 
 interface TaskProps {
   id: number;
