@@ -16,11 +16,11 @@ interface TaskProps {
 
 const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [{ isDragging }, drag, preview] = useDrag(() => ({
+  const [{ isDragging }, drag] = useDrag(() => ({
     type: ItemTypes.TASK,
     item: { id },
     collect: (monitor) => ({
-      isDragging: !!monitor.isDragging(),
+      isDragging: !monitor.isDragging(),
     }),
     options: {
       dropEffect: 'move',
@@ -28,7 +28,6 @@ const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }
   }));
 
   drag(ref);
-  preview(ref);
 
   const handleInputChange = (field: keyof typeof userInput, value: string) => {
     setUserInput((prev) => ({ ...prev, [field]: value }));
