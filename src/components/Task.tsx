@@ -1,8 +1,9 @@
-import { CSSProperties, useState } from 'react';
+import { CSSProperties, useState, useRef } from 'react';
 import { Card, CardHeader, CardContent, IconButton, TextField, TextareaAutosize } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { useDrag } from 'react-dnd';
+import { useDrag, DragPreviewImage } from 'react-dnd';
 import { ItemTypes } from '../constants';
+//new comment
 
 interface TaskProps {
   id: number;
@@ -14,13 +15,20 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ id, title, summary, description, onDelete }) => {
-  const [{ isDragging }, drag] = useDrag(() => ({
+  const ref = useRef<HTMLDivElement>(null);
+  const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: ItemTypes.TASK,
     item: { id },
     collect: (monitor) => ({
-      isDragging: !monitor.isDragging(),
+      isDragging: !!monitor.isDragging(),
     }),
+    options: {
+      dropEffect: 'move',
+    }
   }));
+
+  drag(ref);
+  preview(ref);
 
   const handleInputChange = (field: keyof typeof userInput, value: string) => {
     setUserInput((prev) => ({ ...prev, [field]: value }));
