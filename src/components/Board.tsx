@@ -40,7 +40,7 @@ const Board: React.FC = () => {
 
  return (
     <Container maxWidth="xl">
-      <Typography variant="h4" gutterBottom>
+      <Typography variant="h4" gutterBottom style={{ textAlign: 'center' }}>
         Kanban Board
       </Typography>
       <Grid container spacing={3}>
