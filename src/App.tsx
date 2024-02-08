@@ -1,13 +1,15 @@
-import Board from './components/Board';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import CustomDragLayer from './components/CustomDragLayer';
+import Board from './components/Board';
 
-function App() {
+const App: React.FC = () => {
   return (
     <DndProvider backend={HTML5Backend}>
+      <CustomDragLayer />
       <Board />
     </DndProvider>
   );
-}
+};
 
 export default App;

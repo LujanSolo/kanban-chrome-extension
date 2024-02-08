@@ -4,7 +4,9 @@ import CustomDragItem from './CustomDragItem';
 interface DragItem {
   id: number;
   type: string;
-  title: string;
+  taskTitle: string;
+  summary: string;
+  description: string;
 }
 
 interface CollectedProps {
@@ -38,7 +40,6 @@ const getItemStyles = (currentOffset: XYCoord | null): React.CSSProperties => {
 
 const CustomDragLayer: React.FC = () => {
   const {
-    itemType,
     isDragging,
     item,
     currentOffset,
@@ -51,11 +52,10 @@ const CustomDragLayer: React.FC = () => {
   if (!isDragging || !item) {
     return null;
   }
-
   return (
     <div style={layerStyles}>
       <div style={getItemStyles(currentOffset)}>
-        <CustomDragItem item={item} />
+        <CustomDragItem taskTitle={item.taskTitle} summary={item.summary} description={item.description} />
       </div>
     </div>
   );
