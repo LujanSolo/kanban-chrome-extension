@@ -63,12 +63,13 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
             onChange={(e) => handleInputChange('taskTitle', e.target.value)}
             fullWidth
             variant="standard"
-            label="Task Title" 
+            label="Task Title"
+            style={{ backgroundColor: '#F5F5F5', borderRadius: '4px', border: '3px solid black' }} 
           />
         }
         action={
-          <IconButton aria-label="delete" onClick={() => onDelete(id)}>
-            <DeleteIcon />
+          <IconButton aria-label="delete" onClick={() => onDelete(id)} style={{ border: "2px black solid", marginLeft: "15px", backgroundColor: 'white' }}>
+            <DeleteIcon style={{ color: 'red', }} />
           </IconButton>
         }
       />
@@ -82,6 +83,7 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
           multiline
           minRows={2}
           margin="normal"
+          style={{ backgroundColor: '#F5F5F5', borderRadius: '4px', border: '3px solid black' }}
         />
         <TextField
           value={userInput.description}
@@ -92,6 +94,7 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
           multiline
           minRows={4}
           margin="normal"
+          style={{ backgroundColor: '#F5F5F5', borderRadius: '4px', border: '3px solid black' }}
         />
       </CardContent>
     </Card>
