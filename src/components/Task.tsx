@@ -1,5 +1,5 @@
-import React, { CSSProperties, useState, useRef, useEffect } from 'react';
-import { Card, CardHeader, CardContent, IconButton, TextField } from '@mui/material';
+import { CSSProperties, useState, useRef, useEffect } from 'react';
+import { Card, CardHeader, CardContent, IconButton, TextField, Typography } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { useDrag } from 'react-dnd';
 import { ItemTypes } from '../constants';
@@ -16,7 +16,7 @@ interface TaskProps {
 }
 
 const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDelete }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const dragRef = useRef<HTMLDivElement>(null);
 
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: ItemTypes.TASK,
@@ -33,7 +33,7 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
     preview(getEmptyImage(), { captureDraggingState: true });
   }, [preview]);
 
-  drag(ref);
+  drag(dragRef);
 
   const handleInputChange = (field: keyof typeof userInput, value: string) => {
     setUserInput(prev => ({ ...prev, [field]: value }));
@@ -52,7 +52,10 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
   } : {};
 
   return (
-    <Card ref={drag} style={{ marginBottom: '8px', ...dragStyle }}>
+    <Card style={{ marginBottom: '8px', ...dragStyle }}>
+      <div ref={dragRef} style={{ cursor: 'move', }}> 
+        <Typography variant="subtitle1">Drag Here</Typography>
+      </div>
       <CardHeader
         title={
           <TextField
@@ -60,7 +63,7 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
             onChange={(e) => handleInputChange('taskTitle', e.target.value)}
             fullWidth
             variant="standard"
-            label="Task Title" // Corrected the label to be more user-friendly
+            label="Task Title" 
           />
         }
         action={
