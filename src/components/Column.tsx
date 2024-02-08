@@ -4,10 +4,9 @@ import AddIcon from '@mui/icons-material/Add';
 import { useDrop } from 'react-dnd';
 import { ItemTypes } from '../constants';
 
-// Updated Task interface to reflect the changes
 interface Task {
   id: number;
-  taskTitle: string; // Updated from title to taskTitle
+  taskTitle: string;
   summary: string;
   description: string;
   column: string;
@@ -44,8 +43,8 @@ const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask, 
           {tasks.map((task) => (
             <Task
               key={task.id}
-              id={task.id} // Add the 'id' prop
-              column={task.column} // Add the 'column' prop
+              id={task.id} 
+              column={task.column} 
               taskTitle={task.taskTitle}
               summary={task.summary}
               description={task.description}
