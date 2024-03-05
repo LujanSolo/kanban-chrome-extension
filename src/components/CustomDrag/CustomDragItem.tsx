@@ -11,7 +11,7 @@ const CustomDragItem: React.FC<CustomDragItemProps> = ({ taskTitle, summary, des
       marginBottom: '16px',
       minWidth: '250px',
       maxWidth: '500px',
-      backgroundColor: 'white',
+      backgroundColor: 'f9f7f3',
       border: '1px solid #ccc',
       borderRadius: '4px',
       boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
@@ -22,7 +22,7 @@ const CustomDragItem: React.FC<CustomDragItemProps> = ({ taskTitle, summary, des
       justifyContent: 'space-between',
       height: 'auto'
     }}>
-      <div style={{ marginBottom: '8px', fontWeight: 'bold' }}>{taskTitle}</div>
+      <div style={{ marginBottom: '8px', fontWeight: 'bold', color: 'black' }}>{taskTitle}</div>
       {summary && <div style={{ marginBottom: '8px' }}>{summary}</div>}
       {description && <div style={{ whiteSpace: 'pre-wrap' }}>{description}</div>}
     </div>

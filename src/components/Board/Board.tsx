@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Container, Typography, Grid } from '@mui/material';
-import Column from './Column';
+import Column from '../Column/Column';
 
 interface Task {
   id: number;
-  taskTitle: string; 
+  taskTitle: string;
   summary: string;
   description: string;
   column: string;
@@ -20,9 +20,9 @@ const Board: React.FC = () => {
   const handleAddTask = () => {
     const newTask: Task = {
       id: tasks.length + 1,
-      taskTitle: 'New Task', 
-      summary: '', 
-      description: '', 
+      taskTitle: '',
+      summary: '',
+      description: '',
       column: 'To Do',
     };
 
@@ -32,16 +32,16 @@ const Board: React.FC = () => {
   const handleMoveTask = (taskId: number, targetColumn: string) => {
     setTasks(prevTasks => {
       const updatedTasks = prevTasks.map(task =>
-        task.id === taskId ? { ...task, column: targetColumn } : task 
+        task.id === taskId ? { ...task, column: targetColumn } : task
       );
       return updatedTasks;
     });
   };
 
- return (
-    <Container maxWidth="xl">
-      <Typography variant="h4" gutterBottom style={{ textAlign: 'center' }}>
-        Kanban Board
+  return (
+    <Container maxWidth="xl" style={{ background: 'gray' }}>
+      <Typography variant="h4" gutterBottom style={{ textAlign: 'center', background: 'blue' }}>
+        Google Chrome Kanban Extension
       </Typography>
       <Grid container spacing={3}>
         {['To Do', 'In Progress', 'Done'].map((columnTitle, index) => (
@@ -50,7 +50,7 @@ const Board: React.FC = () => {
               title={columnTitle}
               tasks={tasks.filter(task => task.column === columnTitle)}
               onDeleteTask={handleDeleteTask}
-              onAddTask={columnTitle === 'To Do' ? handleAddTask : undefined} 
+              onAddTask={columnTitle === 'To Do' ? handleAddTask : undefined}
               onMoveTask={handleMoveTask}
             />
           </Grid>
