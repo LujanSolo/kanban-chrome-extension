@@ -75,7 +75,7 @@ const Task: React.FC<TaskProps> = ({ id, taskTitle, summary, description, onDele
               className={styles.deleteButton}
             // style={{ border: "1px black solid", marginLeft: "15px", backgroundColor: 'white' }}
             >
-              <DeleteIcon style={{ color: 'black', fontSize: '20px'}} />
+              <DeleteIcon style={{ color: 'black', fontSize: '20px' }} />
             </IconButton>
           }
         />

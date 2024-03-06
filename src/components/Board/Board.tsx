@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Container, Typography, Grid } from '@mui/material';
 import Column from '../Column/Column';
+import styles from './Board.module.css';
 
 interface Task {
   id: number;
@@ -39,13 +40,13 @@ const Board: React.FC = () => {
   };
 
   return (
-    <Container maxWidth="xl" style={{ background: 'gray' }}>
-      <Typography variant="h4" gutterBottom style={{ textAlign: 'center', background: 'blue' }}>
+    <Container maxWidth="xl" className={styles.container}>
+      <Typography variant="h4" gutterBottom className={styles.mainHeader}>
         Google Chrome Kanban Extension
       </Typography>
       <Grid container spacing={3}>
         {['To Do', 'In Progress', 'Done'].map((columnTitle, index) => (
-          <Grid item xs={4} key={index}>
+          <Grid item xs={4} key={index} >
             <Column
               title={columnTitle}
               tasks={tasks.filter(task => task.column === columnTitle)}

@@ -29,18 +29,18 @@ const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask, 
 
   return (
     <Paper elevation={3} className={styles.paper} ref={drop}>
-      <div className='testDiv' style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Typography variant="h6" style={{ borderBottom: '1px solid #ccc', paddingBottom: '8px' }}>
+      <div className='container' >
+        <div className='header'>
+          <Typography variant="h6" className="title">
             {title}
           </Typography>
           {title === 'To Do' && onAddTask && (
-            <IconButton aria-label="add" color="primary" onClick={onAddTask}>
+            <IconButton aria-label="add" color="primary" onClick={onAddTask} className="addTaskButton">
               <AddIcon />
             </IconButton>
           )}
         </div>
-        <div style={{ flex: 1, marginTop: '8px' }}>
+        <div className='taskList'>
           {tasks.map((task) => (
             <Task
               key={task.id}
@@ -57,6 +57,7 @@ const Column: React.FC<ColumnProps> = ({ title, tasks, onDeleteTask, onAddTask, 
       </div>
     </Paper>
   );
+  
 };
 
 export default Column;

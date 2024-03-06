@@ -1,0 +1,9 @@
+.container {
+  background: gray;
+}
+
+.mainHeader {
+  text-align: center;
+  background: blue;
+  color: white;
+}

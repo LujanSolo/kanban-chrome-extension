@@ -1,7 +1,27 @@
-.paper {
-  /* padding: 16px; */
-  margin-bottom: 16px;
-  min-width: 250px;
-  flex-grow: 1;
-  min-height: 100%;
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 8px;
+}
+
+.taskList {
+  flex: 1;
+  margin-top: 8px;
+}
+
+/* Additional styles for IconButton if needed */
+.addTaskButton {
+  /* Your styles here */
 }
